@@ -10,22 +10,32 @@ interface SampleInterface {
   age: number;
 }
 
+const columns: Column<SampleInterface>[] = [
+  {
+    title: 'Name',
+    dataIndex: 'name',
+    key: 'name',
+    render: (value) => <div data-testid={`test-name-${value}`}>{value}</div>,
+  },
+  {
+    title: 'Age',
+    dataIndex: 'age',
+    key: 'age',
+  },
+];
+
+const dataSource: SampleInterface[] = [
+  { id: 1, name: 'John Doe', age: 30 },
+  { id: 2, name: 'Armin', age: 25 },
+];
+
 describe('Table Component', () => {
   it('renders the table with columns', () => {
-    const columns: Column<SampleInterface>[] = [
-      { title: 'Name', dataIndex: 'name', key: 'name' },
-      { title: 'Age', dataIndex: 'age', key: 'age' },
-    ];
-
-    const dataSource: SampleInterface[] = [
-      { id: 1, name: 'John Doe', age: 30 },
-      { id: 2, name: 'Jane Smith', age: 25 },
-    ];
-
     render(<Table columns={columns} dataSource={dataSource} key="id" />);
 
     // Verify content is rendered correctly
     expect(screen.getByText('Name')).toBeInTheDocument();
     expect(screen.getByText('John Doe')).toBeInTheDocument();
+    expect(screen.getByTestId('test-name-Armin')).toHaveTextContent('Armin');
   });
 });
