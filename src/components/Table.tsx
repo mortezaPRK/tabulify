@@ -8,6 +8,8 @@ const Table = <T,>({
   rowSelection,
   pagination,
   key,
+  className,
+  onRowClick,
 }: TableProps<T>) => {
   const [currentPage, setCurrentPage] = useState(pagination?.current || 1);
 
@@ -25,9 +27,9 @@ const Table = <T,>({
     : dataSource;
 
   return (
-    <div>
-      <table>
-        <thead>
+    <>
+      <table className={className}>
+        <thead className="tabulify-head">
           <tr>
             {rowSelection && <th></th>}
             {columns.map((column) => (
@@ -35,9 +37,12 @@ const Table = <T,>({
             ))}
           </tr>
         </thead>
-        <tbody>
+        <tbody className="tabulify-body">
           {paginatedData.map((record, index) => (
-            <tr key={[record[key], Math.random].join('-')}>
+            <tr
+              key={[record[key], Math.random].join('-')}
+              onClick={() => onRowClick?.(record[key])}
+            >
               {columns.map((column) => (
                 <td key={[column.key, Math.random].join('-')}>
                   {column.render
@@ -50,7 +55,7 @@ const Table = <T,>({
         </tbody>
       </table>
       {pagination && (
-        <div className="pagination">
+        <div className="tabulify-pagination">
           {Array.from(
             { length: Math.ceil(pagination.total / pageSize) },
             (_, i) => i + 1
@@ -65,7 +70,7 @@ const Table = <T,>({
           ))}
         </div>
       )}
-    </div>
+    </>
   );
 };
 
