@@ -2,7 +2,7 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import Table from './Table';
-import { Column } from './types';
+import { Column } from './Table.types';
 
 interface SampleInterface {
   key: number;
