@@ -4,7 +4,7 @@ import React from 'react';
 export interface Column<T> {
   title: string;
   dataIndex: keyof T; // Keys of the data source type
-  key: string;
+  key: keyof T;
   sorter?: (a: T, b: T) => number;
   render?: (value: T[keyof T], record: T, index: number) => React.ReactNode;
 }

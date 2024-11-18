@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 import { TableProps } from './Table.types';
 
 // Table Component
-const Table = <T extends { key: React.Key }>({
+const Table = <T,>({
   columns,
   dataSource,
   rowSelection,
   pagination,
+  key,
 }: TableProps<T>) => {
   const [currentPage, setCurrentPage] = useState(pagination?.current || 1);
 
@@ -30,15 +31,15 @@ const Table = <T extends { key: React.Key }>({
           <tr>
             {rowSelection && <th></th>}
             {columns.map((column) => (
-              <th key={column.key}>{column.title}</th>
+              <th key={[column.key, Math.random].join('-')}>{column.title}</th>
             ))}
           </tr>
         </thead>
         <tbody>
           {paginatedData.map((record, index) => (
-            <tr key={record.key}>
+            <tr key={[record[key], Math.random].join('-')}>
               {columns.map((column) => (
-                <td key={column.key}>
+                <td key={[column.key, Math.random].join('-')}>
                   {column.render
                     ? column.render(record[column.dataIndex], record, index)
                     : (record[column.dataIndex] as React.ReactNode)}

@@ -5,7 +5,7 @@ import Table from './Table';
 import { Column } from './Table.types';
 
 interface SampleInterface {
-  key: number;
+  id: number;
   name: string;
   age: number;
 }
@@ -18,11 +18,11 @@ describe('Table Component', () => {
     ];
 
     const dataSource: SampleInterface[] = [
-      { key: 1, name: 'John Doe', age: 30 },
-      { key: 2, name: 'Jane Smith', age: 25 },
+      { id: 1, name: 'John Doe', age: 30 },
+      { id: 2, name: 'Jane Smith', age: 25 },
     ];
 
-    render(<Table columns={columns} dataSource={dataSource} key="key" />);
+    render(<Table columns={columns} dataSource={dataSource} key="id" />);
 
     // Verify content is rendered correctly
     expect(screen.getByText('Name')).toBeInTheDocument();
