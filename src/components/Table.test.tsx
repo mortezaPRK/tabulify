@@ -22,7 +22,7 @@ describe('Table Component', () => {
       { key: 2, name: 'Jane Smith', age: 25 },
     ];
 
-    render(<Table columns={columns} dataSource={dataSource} />);
+    render(<Table columns={columns} dataSource={dataSource} key="key" />);
 
     // Verify content is rendered correctly
     expect(screen.getByText('Name')).toBeInTheDocument();

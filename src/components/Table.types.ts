@@ -25,9 +25,10 @@ export interface Pagination {
 }
 
 // Table Props
-export interface TableProps<T extends { key: React.Key }> {
+export interface TableProps<T> {
   columns: Column<T>[];
   dataSource: T[];
+  key: keyof T;
   rowSelection?: RowSelection<T>;
   pagination?: Pagination;
 }
