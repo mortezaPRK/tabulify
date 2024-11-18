@@ -28,7 +28,7 @@ export interface TableProps<T> {
   className?: string;
   columns: Column<T>[];
   dataSource: T[];
-  dataId: keyof T;
+  dataIndex: keyof T;
   rowSelection?: RowSelection<T>;
   pagination?: Pagination;
   onRowClick?: (id: T[keyof T]) => void;

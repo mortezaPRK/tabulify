@@ -29,7 +29,7 @@ const dataSource: SampleInterface[] = [
 
 describe('Table Component', () => {
   it('renders the table with columns', () => {
-    render(<Table columns={columns} dataSource={dataSource} dataId="id" />);
+    render(<Table columns={columns} dataSource={dataSource} dataIndex="id" />);
 
     // Verify content is rendered correctly
     expect(screen.getByText('Name')).toBeInTheDocument();

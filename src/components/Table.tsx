@@ -8,7 +8,7 @@ const Table = <T,>({
   dataSource,
   rowSelection,
   pagination,
-  dataId,
+  dataIndex,
   className,
   onRowClick,
 }: TableProps<T>) => {
@@ -41,8 +41,8 @@ const Table = <T,>({
         <tbody className="tabulify-body">
           {paginatedData.map((record, index) => (
             <tr
-              key={getUniqueId(record[dataId])}
-              onClick={() => onRowClick?.(record[dataId])}
+              key={getUniqueId(record[dataIndex])}
+              onClick={() => onRowClick?.(record[dataIndex])}
             >
               {columns.map((column) => (
                 <td key={getUniqueId(column.key)}>
