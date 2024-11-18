@@ -1,6 +1,6 @@
 {
   "name": "tabulify",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "type": "module",
   "main": "dist/index.js",
   "scripts": {
@@ -16,9 +16,13 @@
     "lint:fix": "eslint . --fix"
   },
   "keywords": [],
-  "author": "",
+  "author": "Armin Basirian",
   "license": "ISC",
   "description": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/arbasirian/tabulify"
+  },
   "peerDependencies": {
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
