@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "types": ["@testing-library/jest-dom"],
+    "target": "ES5",
+    "module": "ESNext",
+    "lib": ["DOM", "ESNext"],
+    "declaration": true,
+    "declarationDir": "dist/types",
+    "outDir": "dist",
+    "jsx": "react",
+    "moduleResolution": "Node",
+    "esModuleInterop": true,
+    "skipLibCheck": true
+  },
+  "include": ["src/**/*.ts", "src/**/*.tsx", "jest.config.js"],
+  "exclude": ["node_modules", "dist", "test", "**/*.test.ts", "**/*.test.tsx"]
+}
