@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { TableProps } from './Table.types';
+import { getUniqueId } from './utils';
 
 // Table Component
 const Table = <T,>({
@@ -33,18 +34,18 @@ const Table = <T,>({
           <tr>
             {rowSelection && <th></th>}
             {columns.map((column) => (
-              <th key={[column.key, Math.random].join('-')}>{column.title}</th>
+              <th key={getUniqueId(column.key)}>{column.title}</th>
             ))}
           </tr>
         </thead>
         <tbody className="tabulify-body">
           {paginatedData.map((record, index) => (
             <tr
-              key={[record[key], Math.random].join('-')}
+              key={getUniqueId(record[key])}
               onClick={() => onRowClick?.(record[key])}
             >
               {columns.map((column) => (
-                <td key={[column.key, Math.random].join('-')}>
+                <td key={getUniqueId(column.key)}>
                   {column.render
                     ? column.render(record[column.dataIndex], record, index)
                     : (record[column.dataIndex] as React.ReactNode)}
