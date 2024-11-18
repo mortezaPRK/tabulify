@@ -13,13 +13,11 @@ interface SampleInterface {
 const columns: Column<SampleInterface>[] = [
   {
     title: 'Name',
-    dataIndex: 'name',
     key: 'name',
     render: (value) => <div data-testid={`test-name-${value}`}>{value}</div>,
   },
   {
     title: 'Age',
-    dataIndex: 'age',
     key: 'age',
   },
 ];

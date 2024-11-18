@@ -3,7 +3,6 @@ import React from 'react';
 // Generic Column Interface
 export interface Column<T, K extends keyof T = keyof T> {
   title: string;
-  dataIndex: K; // Keys of the data source type
   key: K;
   sorter?: (a: T, b: T) => number;
   render?: (value: T[K], record: T, index: number) => React.ReactNode;

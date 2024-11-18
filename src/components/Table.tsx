@@ -47,8 +47,8 @@ const Table = <T,>({
               {columns.map((column) => (
                 <td key={getUniqueId(column.key)}>
                   {column.render
-                    ? column.render(record[column.dataIndex], record, index)
-                    : (record[column.dataIndex] as React.ReactNode)}
+                    ? column.render(record[key], record, index)
+                    : (record[key] as React.ReactNode)}
                 </td>
               ))}
             </tr>
