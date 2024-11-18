@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { TableProps } from './Table.types';
 import { getUniqueId } from './utils';
 
+import './Table.css';
+
 // Table Component
 const Table = <T,>({
   columns,
@@ -28,13 +30,15 @@ const Table = <T,>({
     : dataSource;
 
   return (
-    <>
-      <table className={className}>
+    <div className={className}>
+      <table className="tabulify-table">
         <thead className="tabulify-head">
           <tr>
             {rowSelection && <th></th>}
             {columns.map((column) => (
-              <th key={getUniqueId(column.key)}>{column.title}</th>
+              <th className="tabulify-cell" key={getUniqueId(column.key)}>
+                {column.title}
+              </th>
             ))}
           </tr>
         </thead>
@@ -45,7 +49,7 @@ const Table = <T,>({
               onClick={() => onRowClick?.(record[dataIndex])}
             >
               {columns.map((column) => (
-                <td key={getUniqueId(column.key)}>
+                <td className="tabulify-cell" key={getUniqueId(column.key)}>
                   {column.render ? (
                     column.render(record[column.key], record, index)
                   ) : (
@@ -73,7 +77,7 @@ const Table = <T,>({
           ))}
         </div>
       )}
-    </>
+    </div>
   );
 };
 
