@@ -3,11 +3,9 @@
   "version": "1.0.15",
   "type": "module",
   "description": "A lightweight and customizable React table component.",
-  "main": "dist/index.js",
-  "module": "dist/index.esm.js",
-  "types": "dist/types/index.d.ts",
   "scripts": {
     "build": "rollup -c",
+    "watch": "rollup -c --watch",
     "prepublishOnly": "npm run build",
     "test": "jest",
     "test:watch": "jest --watch",
@@ -63,5 +61,12 @@
     "ts-jest": "^29.2.5",
     "ts-node": "^10.9.2",
     "typescript": "^5.6.3"
-  }
+  },
+  "files": [
+    "dist/**/*"
+  ],
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/types/index.d.ts",
+  "style": "dist/index.cjs.css"
 }

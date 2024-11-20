@@ -6,6 +6,15 @@
     border-spacing: 0;
 }
 
+.tabulify-table-header, 
+.tabulify-table-body {
+    min-width: 1500px
+}
+
+.tabulify-head {
+    box-sizing: border-box;
+}
+
 .tabulify-head tr th {
     position: relative;
     color: rgba(0, 0, 0, 0.88);

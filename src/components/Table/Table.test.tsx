@@ -1,8 +1,8 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import Table from './Table';
-import { Column } from './Table.types';
+import Table from './';
+import { Column } from '../../types';
 
 interface SampleInterface {
   id: number;

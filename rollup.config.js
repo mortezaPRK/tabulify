@@ -22,7 +22,6 @@ export default {
       tsconfig: './tsconfig.json', // Use your updated tsconfig.json
     }),
     postcss({
-      extensions: ['.css'], // Process CSS files
       extract: true, // Extract CSS to a separate file
       minimize: true, // Minify the CSS
     }),
