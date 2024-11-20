@@ -31,43 +31,37 @@ const Table = <T,>({
 
   return (
     <div className={className}>
-      <div className="tabulify-table-header">
-        <table>
-          <thead className="tabulify-head">
-            <tr>
-              {rowSelection && <th></th>}
+      <table className="tabulify-table">
+        <thead className="tabulify-head">
+          <tr>
+            {rowSelection && <th></th>}
+            {columns.map((column) => (
+              <th className="tabulify-cell" key={getUniqueId(column.key)}>
+                {column.title}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody className="tabulify-body">
+          {paginatedData.map((record, index) => (
+            <tr
+              key={getUniqueId(record[dataIndex])}
+              onClick={() => onRowClick?.(record[dataIndex])}
+              className={Boolean(onRowClick) ? 'has-hover' : ''}
+            >
               {columns.map((column) => (
-                <th className="tabulify-cell" key={getUniqueId(column.key)}>
-                  {column.title}
-                </th>
+                <td className="tabulify-cell" key={getUniqueId(column.key)}>
+                  {column.render ? (
+                    column.render(record[column.key], record, index)
+                  ) : (
+                    <>{`${record[column.key]}`}</>
+                  )}
+                </td>
               ))}
             </tr>
-          </thead>
-        </table>
-      </div>
-      <div className="tabulify-table-body">
-        <table>
-          <tbody className="tabulify-body">
-            {paginatedData.map((record, index) => (
-              <tr
-                key={getUniqueId(record[dataIndex])}
-                onClick={() => onRowClick?.(record[dataIndex])}
-                className={Boolean(onRowClick) ? 'has-hover' : ''}
-              >
-                {columns.map((column) => (
-                  <td className="tabulify-cell" key={getUniqueId(column.key)}>
-                    {column.render ? (
-                      column.render(record[column.key], record, index)
-                    ) : (
-                      <>{`${record[column.key]}`}</>
-                    )}
-                  </td>
-                ))}
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+          ))}
+        </tbody>
+      </table>
       {pagination && (
         <div className="tabulify-pagination">
           {Array.from(
