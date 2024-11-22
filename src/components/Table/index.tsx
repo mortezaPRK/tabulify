@@ -11,6 +11,7 @@ const Table = <T,>({
   dataIndex,
   className,
   width,
+  testId,
   onRowClick,
 }: TableProps<T>) => {
   const [currentPage, setCurrentPage] = useState(pagination?.current || 1);
@@ -29,7 +30,7 @@ const Table = <T,>({
     : dataSource;
 
   return (
-    <div className={className}>
+    <div className={className} data-testid={testId}>
       <div className="tabulify-container" style={{ width: width ?? '100%' }}>
         <table className="tabulify-table">
           <thead className="tabulify-head">
