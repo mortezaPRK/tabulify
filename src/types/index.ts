@@ -26,6 +26,7 @@ export interface Pagination {
 // Table Props
 export interface TableProps<T> {
   className?: string;
+  width?: string;
   columns: Column<T>[];
   dataSource: T[];
   dataIndex: keyof T;

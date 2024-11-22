@@ -10,6 +10,7 @@ const Table = <T,>({
   pagination,
   dataIndex,
   className,
+  width,
   onRowClick,
 }: TableProps<T>) => {
   const [currentPage, setCurrentPage] = useState(pagination?.current || 1);
@@ -27,41 +28,41 @@ const Table = <T,>({
     ? dataSource.slice((currentPage - 1) * pageSize, currentPage * pageSize)
     : dataSource;
 
-  console.log('DEBUG', Boolean(onRowClick));
-
   return (
     <div className={className}>
-      <table className="tabulify-table">
-        <thead className="tabulify-head">
-          <tr>
-            {rowSelection && <th></th>}
-            {columns.map((column) => (
-              <th className="tabulify-cell" key={getUniqueId(column.key)}>
-                {column.title}
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody className="tabulify-body">
-          {paginatedData.map((record, index) => (
-            <tr
-              key={getUniqueId(record[dataIndex])}
-              onClick={() => onRowClick?.(record[dataIndex])}
-              className={Boolean(onRowClick) ? 'has-hover' : ''}
-            >
+      <div className="tabulify-container" style={{ width: width ?? '100%' }}>
+        <table className="tabulify-table">
+          <thead className="tabulify-head">
+            <tr>
+              {rowSelection && <th></th>}
               {columns.map((column) => (
-                <td className="tabulify-cell" key={getUniqueId(column.key)}>
-                  {column.render ? (
-                    column.render(record[column.key], record, index)
-                  ) : (
-                    <>{`${record[column.key]}`}</>
-                  )}
-                </td>
+                <th className="tabulify-cell" key={getUniqueId(column.key)}>
+                  {column.title}
+                </th>
               ))}
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody className="tabulify-body">
+            {paginatedData.map((record, index) => (
+              <tr
+                key={getUniqueId(record[dataIndex])}
+                onClick={() => onRowClick?.(record[dataIndex])}
+                className={Boolean(onRowClick) ? 'has-hover' : ''}
+              >
+                {columns.map((column) => (
+                  <td className="tabulify-cell" key={getUniqueId(column.key)}>
+                    {column.render ? (
+                      column.render(record[column.key], record, index)
+                    ) : (
+                      <>{`${record[column.key]}`}</>
+                    )}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
       {pagination && (
         <div className="tabulify-pagination">
           {Array.from(

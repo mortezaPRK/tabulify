@@ -1,5 +1,10 @@
+.tabulify-container {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling for iOS */
+}
 .tabulify-table {
     width: 100%;
+    min-width: 100%;
     text-align: start;
     border-radius: 8px 8px 0 0;
     border-collapse: separate;
@@ -22,7 +27,7 @@
     border-bottom: 1px solid #f0f0f0;
 }
 
-.tabulify-body tr td:hover {
+.tabulify-body tr:hover {
     background: #fafafa
 }
 
