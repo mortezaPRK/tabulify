@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 interface PaginationProps {
   pageSize: number;
@@ -16,11 +16,11 @@ const Pagination: React.FC<PaginationProps> = ({
   const totalPages = Math.ceil(total / pageSize);
 
   return (
-    <div className="pagination">
+    <div className="tabulify-pagination">
       {[...Array(totalPages)].map((_, i) => (
         <button
           key={i}
-          className={currentPage === i + 1 ? "active" : ""}
+          className={currentPage === i + 1 ? 'active' : ''}
           onClick={() => onPageChange(i + 1)}
         >
           {i + 1}

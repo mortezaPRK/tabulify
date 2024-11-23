@@ -1,4 +1,4 @@
-import './components/Table/styles.css';
+import './styles.css';
 
 // Export the Table component
 export { default as Table } from './components/Table';
