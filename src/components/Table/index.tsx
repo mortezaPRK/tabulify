@@ -19,22 +19,14 @@ const Table = <T,>({
 
   const [isScrolledToEnd, setIsScrolledToEnd] = useState(false);
   const [isScrollStarted, setIsScrollStarted] = useState(false);
-  const [hasScroll, setHasScroll] = useState(false);
 
   const handleScroll = () => {
     const container = containerRef.current;
     if (container) {
       const isAtEnd =
         container.scrollLeft + container.clientWidth >= container.scrollWidth;
-
-      console.log('DEBUG', {
-        width: container.scrollWidth,
-        cw: container.clientWidth,
-        left: container.scrollLeft,
-      });
       setIsScrollStarted(container.scrollLeft > 0);
       setIsScrolledToEnd(isAtEnd);
-      setHasScroll(container.scrollWidth >= container.clientWidth);
     }
   };
 
@@ -55,12 +47,12 @@ const Table = <T,>({
 
   const containerClassNames = useMemo(() => {
     const classes = ['tabulify-container'];
-    if (hasScroll) classes.push('has-scroll');
+    if (width) classes.push('has-scroll');
     if (isScrolledToEnd) classes.push('hide-right-shadow');
     if (!isScrollStarted) classes.push('hide-left-shadow');
 
     return classes.join(' ');
-  }, [hasScroll, isScrolledToEnd, isScrollStarted]);
+  }, [width, isScrolledToEnd, isScrollStarted]);
 
   useEffect(() => {
     const container = containerRef.current;
