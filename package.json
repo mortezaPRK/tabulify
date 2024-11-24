@@ -1,6 +1,6 @@
 {
   "name": "tabulify",
-  "version": "1.0.30",
+  "version": "1.0.31",
   "type": "module",
   "description": "A lightweight and customizable React table component.",
   "scripts": {
