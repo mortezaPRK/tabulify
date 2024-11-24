@@ -26,4 +26,5 @@ export default {
       minimize: true, // Minify the CSS
     }),
   ],
+  external: ['react'],
 };
