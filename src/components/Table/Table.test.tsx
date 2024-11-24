@@ -36,4 +36,18 @@ describe('Table Component', () => {
     expect(screen.getByText('John Doe')).toBeInTheDocument();
     expect(screen.getByTestId('test-name-Armin')).toHaveTextContent('Armin');
   });
+
+  it('renders the table with no data', () => {
+    render(<Table columns={columns} dataSource={[]} dataIndex="id" />);
+
+    // Verify content is rendered correctly
+    expect(screen.getByTestId('no-data')).toBeVisible();
+  });
+
+  it('renders the table with loading state', () => {
+    render(<Table columns={columns} loading dataSource={[]} dataIndex="id" />);
+
+    // Verify content is rendered correctly
+    expect(screen.getByTestId('fetching-data')).toBeVisible();
+  });
 });

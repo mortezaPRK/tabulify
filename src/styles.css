@@ -116,3 +116,42 @@
 .tabulify-pagination button.active {
   border: 1px solid;
 }
+
+.tabulify-body tr .min-height {
+  height: 400px;
+}
+
+.tabulify-body .tabulify-no-data {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex-direction: column;
+}
+
+.tabulify-body .tabulify-loader-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.tabulify-loader {
+  width: 48px;
+  height: 48px;
+  border: 5px solid rgba(0, 0, 0, 0.88);
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

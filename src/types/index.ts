@@ -52,5 +52,19 @@ export interface TableProps<T> {
   className?: string;
   width?: string;
   testId?: string;
+  loading?: boolean;
   onRowClick?: (id: T[keyof T]) => void;
+}
+
+export interface TableBodyProps<T> {
+  paginatedData: T[];
+  dataIndex: keyof T;
+  columns: Column<T>[];
+  loading?: boolean;
+  onRowClick?: (id: T[keyof T]) => void;
+}
+
+export interface IconProps {
+  width: string;
+  height: string;
 }

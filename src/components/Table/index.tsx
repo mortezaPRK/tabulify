@@ -2,12 +2,13 @@ import React, { useEffect, useRef, useState } from 'react';
 import { TableProps } from '../../types';
 import { cx, getUniqueId, sortData } from '../../utils';
 import Pagination from '../Pagination';
-import { SortIcon } from '../SortIcon';
+import { SortIcon } from '../IconSort';
+import { TableBody } from './TableBody';
 
 // Table Component
 const Table = <T,>({
-  columns,
-  dataSource,
+  columns = [],
+  dataSource = [],
   rowSelection,
   pagination,
   dataIndex,
@@ -15,6 +16,7 @@ const Table = <T,>({
   width,
   testId,
   sort,
+  loading,
   onRowClick,
 }: TableProps<T>) => {
   const containerRef: React.Ref<HTMLDivElement> = useRef(null);
@@ -36,12 +38,6 @@ const Table = <T,>({
 
   const pageSize = pagination?.pageSize || dataSource.length;
 
-  // Handle pagination
-  const handlePageChange = (page: number) => {
-    setCurrentPage(page);
-    pagination?.onChange?.(page);
-  };
-
   // Sorted Data
   const sortedData = sortData({
     dataSource,
@@ -53,6 +49,12 @@ const Table = <T,>({
   const paginatedData = pagination
     ? sortedData.slice((currentPage - 1) * pageSize, currentPage * pageSize)
     : sortedData;
+
+  // Handle pagination
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+    pagination?.onChange?.(page);
+  };
 
   useEffect(() => {
     const container = containerRef.current;
@@ -100,25 +102,14 @@ const Table = <T,>({
                 ))}
               </tr>
             </thead>
-            <tbody className="tabulify-body">
-              {paginatedData.map((record, index) => (
-                <tr
-                  key={getUniqueId(record[dataIndex])}
-                  className={cx([Boolean(onRowClick) && 'has-hover'])}
-                  data-id={String(record[dataIndex])}
-                  onClick={() => onRowClick?.(record[dataIndex])}
-                >
-                  {columns.map((column) => (
-                    <td className="tabulify-cell" key={getUniqueId(column.key)}>
-                      {column.render ? (
-                        column.render(record[column.key], record, index)
-                      ) : (
-                        <>{`${record[column.key]}`}</>
-                      )}
-                    </td>
-                  ))}
-                </tr>
-              ))}
+            <tbody className="tabulify-body" data-testid="table-body-content">
+              <TableBody
+                paginatedData={paginatedData}
+                dataIndex={dataIndex}
+                columns={columns}
+                loading={loading}
+                onRowClick={onRowClick}
+              />
             </tbody>
           </table>
         </div>

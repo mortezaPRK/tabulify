@@ -1,7 +1,7 @@
 import React from 'react';
 import { SortOrder } from '../../types';
-import { IconCartDown } from './IconCartDown';
-import { IconCartUp } from './IconCartUp';
+import { IconCartDown } from '../Icons/IconCartDown';
+import { IconCartUp } from '../Icons/IconCartUp';
 
 interface Props {
   sortOrder: SortOrder;
