@@ -1,5 +1,11 @@
 import React from 'react';
 
+export type SortOrder = 'asc' | 'desc';
+
+type SortableKeys<T> = {
+  [K in keyof T]: T[K] extends number | string | null ? K : never;
+}[keyof T];
+
 // Generic Column Interface
 export interface Column<T, K extends keyof T = keyof T> {
   title: string;
@@ -23,6 +29,18 @@ export interface Pagination {
   onChange?: (page: number) => void;
 }
 
+export interface Sort<T> {
+  sortBy: SortableKeys<T>;
+  sortOrder: SortOrder;
+  onSort: (sortBy: keyof T) => void;
+}
+
+export interface SortOptions<T> {
+  dataSource: T[];
+  sortBy?: SortableKeys<T>;
+  sortOrder?: SortOrder;
+}
+
 // Table Props
 export interface TableProps<T> {
   columns: Column<T>[];
@@ -30,6 +48,7 @@ export interface TableProps<T> {
   dataIndex: keyof T;
   rowSelection?: RowSelection<T>;
   pagination?: Pagination;
+  sort?: Sort<T>;
   className?: string;
   width?: string;
   testId?: string;

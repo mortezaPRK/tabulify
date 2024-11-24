@@ -1,7 +1,8 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { TableProps } from '../../types';
-import { getUniqueId } from '../../utils';
+import { cx, getUniqueId, sortData } from '../../utils';
 import Pagination from '../Pagination';
+import { SortIcon } from '../SortIcon';
 
 // Table Component
 const Table = <T,>({
@@ -13,6 +14,7 @@ const Table = <T,>({
   className,
   width,
   testId,
+  sort,
   onRowClick,
 }: TableProps<T>) => {
   const containerRef: React.Ref<HTMLDivElement> = useRef(null);
@@ -40,19 +42,17 @@ const Table = <T,>({
     pagination?.onChange?.(page);
   };
 
+  // Sorted Data
+  const sortedData = sortData({
+    dataSource,
+    sortBy: sort.sortBy,
+    sortOrder: sort.sortOrder,
+  });
+
   // Paginate data
   const paginatedData = pagination
-    ? dataSource.slice((currentPage - 1) * pageSize, currentPage * pageSize)
-    : dataSource;
-
-  const containerClassNames = useMemo(() => {
-    const classes = ['tabulify-container'];
-    if (width) classes.push('has-scroll');
-    if (isScrolledToEnd) classes.push('hide-right-shadow');
-    if (!isScrollStarted) classes.push('hide-left-shadow');
-
-    return classes.join(' ');
-  }, [width, isScrolledToEnd, isScrollStarted]);
+    ? sortedData.slice((currentPage - 1) * pageSize, currentPage * pageSize)
+    : sortedData;
 
   useEffect(() => {
     const container = containerRef.current;
@@ -65,7 +65,12 @@ const Table = <T,>({
     <div className={className} data-testid={testId}>
       <div className="tabulify-wrapper">
         <div
-          className={containerClassNames}
+          className={cx([
+            'tabulify-container',
+            width && 'has-scroll',
+            isScrolledToEnd && 'hide-right-shadow',
+            !isScrollStarted && 'hide-left-shadow',
+          ])}
           ref={containerRef}
           onScroll={handleScroll}
         >
@@ -74,8 +79,19 @@ const Table = <T,>({
               <tr>
                 {rowSelection && <th></th>}
                 {columns.map((column) => (
-                  <th className="tabulify-cell" key={getUniqueId(column.key)}>
-                    {column.title}
+                  <th
+                    className={cx([
+                      'tabulify-cell',
+                      Boolean(sort) && 'has-hover',
+                    ])}
+                    key={getUniqueId(column.key)}
+                    data-testid={`table-head-th-${String(column.key)}`}
+                    onClick={() => sort?.onSort(column.key)}
+                  >
+                    <div>{column.title}</div>
+                    {sort?.sortBy === column.key && (
+                      <SortIcon sortOrder={sort.sortOrder} />
+                    )}
                   </th>
                 ))}
               </tr>
@@ -84,7 +100,7 @@ const Table = <T,>({
               {paginatedData.map((record, index) => (
                 <tr
                   key={getUniqueId(record[dataIndex])}
-                  className={Boolean(onRowClick) ? 'has-hover' : ''}
+                  className={cx([Boolean(onRowClick) && 'has-hover'])}
                   data-id={String(record[dataIndex])}
                   onClick={() => onRowClick?.(record[dataIndex])}
                 >

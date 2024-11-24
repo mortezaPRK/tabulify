@@ -78,6 +78,9 @@
   position: relative;
   padding: 16px;
   overflow-wrap: break-word;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .tabulify-pagination-wrapper {
