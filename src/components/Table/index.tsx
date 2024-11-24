@@ -45,8 +45,8 @@ const Table = <T,>({
   // Sorted Data
   const sortedData = sortData({
     dataSource,
-    sortBy: sort.sortBy,
-    sortOrder: sort.sortOrder,
+    sortBy: sort?.sortBy,
+    sortOrder: sort?.sortOrder,
   });
 
   // Paginate data
@@ -89,7 +89,7 @@ const Table = <T,>({
                     onClick={() => sort?.onSort(column.key)}
                   >
                     <div>{column.title}</div>
-                    {sort?.sortBy === column.key && (
+                    {sort && sort?.sortBy === column.key && (
                       <SortIcon sortOrder={sort.sortOrder} />
                     )}
                   </th>
