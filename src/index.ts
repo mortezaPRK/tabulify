@@ -4,6 +4,13 @@ import './styles.css';
 export { default as Table } from './components/Table';
 
 // Export types (if applicable)
-export type { TableProps, Column, Pagination, RowSelection } from './types';
+export type {
+  TableProps,
+  Column,
+  Pagination,
+  RowSelection,
+  SortOrder,
+  SortBy,
+} from './types';
 
 export {};

@@ -88,10 +88,14 @@ const Table = <T,>({
                     data-testid={`table-head-th-${String(column.key)}`}
                     onClick={() => sort?.onSort(column.key)}
                   >
-                    <div>{column.title}</div>
-                    {sort && sort?.sortBy === column.key && (
-                      <SortIcon sortOrder={sort.sortOrder} />
-                    )}
+                    <div className="tabulify-head-cell-content-wrapper">
+                      <div>{column.title}</div>
+                      <div className="icon-wrapper">
+                        {sort && sort?.sortBy === column.key && (
+                          <SortIcon sortOrder={sort.sortOrder} />
+                        )}
+                      </div>
+                    </div>
                   </th>
                 ))}
               </tr>

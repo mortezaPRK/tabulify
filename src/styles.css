@@ -78,9 +78,19 @@
   position: relative;
   padding: 16px;
   overflow-wrap: break-word;
+}
+.tabulify-head-cell-content-wrapper {
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.tabulify-head-cell-content-wrapper .icon-wrapper {
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .tabulify-pagination-wrapper {

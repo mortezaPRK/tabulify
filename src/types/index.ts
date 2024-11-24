@@ -2,7 +2,7 @@ import React from 'react';
 
 export type SortOrder = 'asc' | 'desc';
 
-type SortableKeys<T> = {
+export type SortBy<T> = {
   [K in keyof T]: T[K] extends number | string | null ? K : never;
 }[keyof T];
 
@@ -30,14 +30,14 @@ export interface Pagination {
 }
 
 export interface Sort<T> {
-  sortBy: SortableKeys<T>;
+  sortBy: SortBy<T>;
   sortOrder: SortOrder;
   onSort: (sortBy: keyof T) => void;
 }
 
 export interface SortOptions<T> {
   dataSource: T[];
-  sortBy?: SortableKeys<T>;
+  sortBy?: SortBy<T>;
   sortOrder?: SortOrder;
 }
 
