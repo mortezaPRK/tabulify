@@ -13,4 +13,6 @@ export type {
   SortBy,
 } from './types';
 
+export { useSortTable } from './hooks/useSortTable';
+
 export {};
