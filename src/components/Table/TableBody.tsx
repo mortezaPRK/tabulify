@@ -45,7 +45,7 @@ export const TableBody = <T,>({
           {column.render ? (
             column.render(record[column.key], record, index)
           ) : (
-            <>{`${record[column.key] !== undefined || record[column.key] !== null ? record[column.key] : ''}`}</>
+            <>{record[column.key] ?? ''}</>
           )}
         </td>
       ))}
