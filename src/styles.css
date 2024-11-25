@@ -117,16 +117,13 @@
   border: 1px solid;
 }
 
-.tabulify-body tr .min-height {
-  height: 400px;
-}
-
 .tabulify-body .tabulify-no-data {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
   flex-direction: column;
+  height: 400px;
 }
 
 .tabulify-body .tabulify-loader-wrapper {
@@ -134,6 +131,7 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  height: 400px;
 }
 
 .tabulify-loader {

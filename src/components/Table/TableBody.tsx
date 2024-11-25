@@ -13,7 +13,7 @@ export const TableBody = <T,>({
   if (loading)
     return (
       <tr className="min-height">
-        <td rowSpan={columns?.length ?? 1}>
+        <td colSpan={columns?.length ?? 1}>
           <div className="tabulify-loader-wrapper" data-testid="fetching-data">
             <div className="tabulify-loader" />
           </div>
@@ -24,7 +24,7 @@ export const TableBody = <T,>({
   if (!paginatedData || paginatedData.length < 1)
     return (
       <tr className="min-height">
-        <td rowSpan={columns?.length ?? 1}>
+        <td colSpan={columns?.length ?? 1}>
           <div className="tabulify-no-data" data-testid="no-data">
             <IconBrandDatabricks />
             <div>No Data</div>
