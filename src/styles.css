@@ -153,3 +153,7 @@
     transform: rotate(360deg);
   }
 }
+
+.has-hover {
+  cursor: pointer;
+}

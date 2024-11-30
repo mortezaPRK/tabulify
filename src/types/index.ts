@@ -15,10 +15,11 @@ export interface Column<T, K extends keyof T = keyof T> {
 }
 
 // Row Selection Interface
-export interface RowSelection<T> {
-  type: 'checkbox' | 'radio';
-  selectedRowKeys?: (keyof T)[]; // Selected row keys
-  onChange?: (selectedRowKeys: (keyof T)[], selectedRows: T[]) => void;
+export interface RowSelection<T, K extends keyof T = keyof T> {
+  allSelected?: boolean; // Selected row keys
+  selectedRows: T[K][]; // Selected row keys
+  onChange: (selectedRowKey: T[K]) => void;
+  onSelectAll?: () => void;
 }
 
 // Pagination Interface
@@ -61,6 +62,7 @@ export interface TableBodyProps<T> {
   dataIndex: keyof T;
   columns: Column<T>[];
   loading?: boolean;
+  rowSelection?: RowSelection<T>;
   onRowClick?: (id: T[keyof T]) => void;
 }
 

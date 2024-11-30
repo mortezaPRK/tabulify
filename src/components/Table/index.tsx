@@ -4,6 +4,7 @@ import { cx, getUniqueId, sortData } from '../../utils';
 import Pagination from '../Pagination';
 import { SortIcon } from '../IconSort';
 import { TableBody } from './TableBody';
+import { RowCheckbox } from '../RowCheckbox';
 
 // Table Component
 const Table = <T,>({
@@ -79,7 +80,17 @@ const Table = <T,>({
           <table className="tabulify-table" style={{ width: width ?? '100%' }}>
             <thead className="tabulify-head">
               <tr>
-                {rowSelection && <th></th>}
+                {rowSelection?.selectedRows && (
+                  <th className="tabulify-cell">
+                    {rowSelection?.onSelectAll && (
+                      <RowCheckbox
+                        name="select-all"
+                        isChecked={rowSelection?.allSelected}
+                        onChange={rowSelection.onSelectAll}
+                      />
+                    )}
+                  </th>
+                )}
                 {columns.map((column) => (
                   <th
                     className={cx([
@@ -87,10 +98,13 @@ const Table = <T,>({
                       Boolean(sort) && 'has-hover',
                     ])}
                     key={getUniqueId(column.key)}
-                    data-testid={`table-head-th-${String(column.key)}`}
+                    data-testid="table-head-row"
                     onClick={() => sort?.onSort(column.key)}
                   >
-                    <div className="tabulify-head-cell-content-wrapper">
+                    <div
+                      className="tabulify-head-cell-content-wrapper"
+                      data-id="table-head-row-column"
+                    >
                       <div>{column.title}</div>
                       <div className="icon-wrapper">
                         {sort && sort?.sortBy === column.key && (
@@ -102,12 +116,13 @@ const Table = <T,>({
                 ))}
               </tr>
             </thead>
-            <tbody className="tabulify-body" data-testid="table-body-content">
+            <tbody className="tabulify-body">
               <TableBody
                 paginatedData={paginatedData}
                 dataIndex={dataIndex}
                 columns={columns}
                 loading={loading}
+                rowSelection={rowSelection}
                 onRowClick={onRowClick}
               />
             </tbody>

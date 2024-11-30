@@ -21,6 +21,7 @@ const Pagination: React.FC<PaginationProps> = ({
         <button
           key={i}
           className={currentPage === i + 1 ? 'active' : ''}
+          data-testid="pagination-button"
           onClick={() => onPageChange(i + 1)}
         >
           {i + 1}

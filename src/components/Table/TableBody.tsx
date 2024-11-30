@@ -2,12 +2,14 @@ import React from 'react';
 import { cx, getUniqueId } from '../../utils';
 import { TableBodyProps } from '../../types';
 import IconBrandDatabricks from '../Icons/IconBrandDatabricks';
+import { RowCheckbox } from '../RowCheckbox';
 
 export const TableBody = <T,>({
   paginatedData,
   dataIndex,
   columns,
   loading,
+  rowSelection,
   onRowClick,
 }: TableBodyProps<T>) => {
   if (loading)
@@ -37,11 +39,28 @@ export const TableBody = <T,>({
     <tr
       key={getUniqueId(record[dataIndex])}
       className={cx([Boolean(onRowClick) && 'has-hover'])}
-      data-id={String(record[dataIndex])}
-      onClick={() => onRowClick?.(record[dataIndex])}
+      data-id="table-body-row"
+      onClick={(e) => {
+        if (e.defaultPrevented) return;
+        onRowClick?.(record[dataIndex]);
+      }}
     >
+      {rowSelection && (
+        <td className="tabulify-cell" data-id="table-body-row-column">
+          <RowCheckbox
+            shouldPrevent
+            name={String(record[dataIndex])}
+            isChecked={rowSelection?.selectedRows?.includes(record[dataIndex])}
+            onChange={() => rowSelection.onChange(record[dataIndex])}
+          />
+        </td>
+      )}
       {columns.map((column) => (
-        <td className="tabulify-cell" key={getUniqueId(column.key)}>
+        <td
+          className="tabulify-cell"
+          key={getUniqueId(column.key)}
+          data-id="table-body-row-column"
+        >
           {column.render ? (
             column.render(record[column.key], record, index)
           ) : (
