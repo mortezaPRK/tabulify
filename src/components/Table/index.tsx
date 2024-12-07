@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { TableProps } from '../../types';
 import { cx, getUniqueId, sortData } from '../../utils';
 import Pagination from '../Pagination';
@@ -47,9 +47,14 @@ const Table = <T,>({
   });
 
   // Paginate data
-  const paginatedData = pagination
-    ? sortedData.slice((currentPage - 1) * pageSize, currentPage * pageSize)
-    : sortedData;
+  const paginatedData = useMemo(() => {
+    if (pagination && !pagination?.onChange)
+      return sortedData.slice(
+        (currentPage - 1) * pageSize,
+        currentPage * pageSize
+      );
+    return sortedData;
+  }, [sortedData, pageSize, currentPage, pagination]);
 
   // Handle pagination
   const handlePageChange = (page: number) => {
