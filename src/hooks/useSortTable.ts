@@ -3,10 +3,14 @@ import { SortBy, SortOrder } from '../types';
 
 interface Props<T> {
   defaultSort: SortBy<T>;
+  defaultSortOrder?: SortOrder;
 }
-export const useSortTable = <T>({ defaultSort }: Props<T>) => {
+export const useSortTable = <T>({
+  defaultSort,
+  defaultSortOrder = 'asc',
+}: Props<T>) => {
   const [sortBy, setSortby] = useState<SortBy<T>>(defaultSort);
-  const [sortOrder, setSortOrder] = useState<SortOrder>('asc');
+  const [sortOrder, setSortOrder] = useState<SortOrder>(defaultSortOrder);
 
   const handleSortBy = (newSortBy: keyof T) => {
     if (newSortBy === sortBy) {
